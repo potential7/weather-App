@@ -5,9 +5,42 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:wealther_app/bloc/weather_bloc.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+  Widget getWeatherIcon(int code) {
+    switch (code) {
+      case >= 200 && < 300:
+        return Image.asset('assets/1.png');
+        break;
+        case >= 300 && < 400:
+        return Image.asset('assets/2.png');
+        break;
+        case >= 500 && < 600:
+        return Image.asset('assets/3.png');
+        break;
+        case >= 600 && < 700:
+        return Image.asset('assets/4.png');
+        break;
+        case >= 700 && < 800:
+        return Image.asset('assets/5.png');
+        break;
+        case == 800 :
+        return Image.asset('assets/6.png');
+        break;
+        case (>= 800 && < 804):
+        return Image.asset('assets/7.png');
+        break;
+      default :
+        return Image.asset('assets/7.png');
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,7 +124,7 @@ class HomeScreen extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               fontSize: 25),
                         ),
-                        Image.asset('assets/1.png'),
+                        getWeatherIcon(state.weather.weatherConditionCode!),
                          Center(
                           child: Text(
                             '${state.weather.temperature!.celsius!.round()}°C',
